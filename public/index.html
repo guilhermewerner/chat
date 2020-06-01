@@ -44,11 +44,11 @@
                 <form id="chat">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <input type="text" class="form-control" name="username">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Message</label>
-                        <textarea class="form-control" rows="5" name="message" id="message"></textarea>
+                        <textarea class="form-control" rows="5" name="message"></textarea>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -80,6 +80,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var socket = io('http://localhost:3000');
+
+        $('#chat').submit(function (event) {
+            event.preventDefault();
+
+            var author = $('input[name=username]').val();
+            var message = $('textarea[name=message]').val();
+
+            if (author.length && message.length) {
+                var messageObj = { author, message }
+            }
+
+            socket.emit('sendMessage', messageObj);
+        })
+    </script>
 </body>
 
 </html>
