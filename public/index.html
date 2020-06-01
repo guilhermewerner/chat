@@ -57,10 +57,7 @@
             </div>
             <div class="pt-4">
                 <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Username:</strong> Message</li>
-                        <li class="list-group-item"><strong>Username:</strong> Message</li>
-                        <li class="list-group-item"><strong>Username:</strong> Message</li>
+                    <ul class="list-group list-group-flush" id="messages">
                     </ul>
                 </div>
             </div>
@@ -84,15 +81,31 @@
     <script type="text/javascript">
         var socket = io('http://localhost:3000');
 
+        function renderMessage(message) {
+            $('#messages').append(`<li class="list-group-item"><strong>${message.author}:</strong> ${message.content}</li>`);
+        }
+
+        socket.on('previousMessages', function (messages) {
+            for (message of messages) {
+                renderMessage(message);
+            }
+        });
+
+        socket.on('receiveMessage', function (message) {
+            renderMessage(message);
+        });
+
         $('#chat').submit(function (event) {
             event.preventDefault();
 
             var author = $('input[name=username]').val();
-            var message = $('textarea[name=message]').val();
+            var content = $('textarea[name=message]').val();
 
-            if (author.length && message.length) {
-                var messageObj = { author, message }
+            if (author.length && content.length) {
+                var messageObj = { author, content }
             }
+
+            renderMessage(messageObj);
 
             socket.emit('sendMessage', messageObj);
         })

@@ -7,7 +7,7 @@ const app = express();
  * Declare HTTP and Websocket protocols
  */
 const server = require('http').createServer(app);
-const socket = require('socket.io')(server);
+const io = require('socket.io')(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -22,6 +22,19 @@ app.use('/', (req, res) => {
     res.render('index.html')
 });
 
-app.listen(3000, () =>
+let messages = [];
+
+io.on('connection', socket => {
+    console.log(`Socket ${socket.id} connected`);
+
+    socket.emit('previousMessages', messages);
+
+    socket.on('sendMessage', data => {
+        messages.push(data);
+        socket.broadcast.emit('receiveMessage', data);
+    })
+})
+
+server.listen(3000, () =>
     console.log(`Server listen on port: 3000`)
 );
