@@ -37,6 +37,6 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(3000, () =>
+server.listen(3333, () =>
     console.log(`Server listen on port: 3333`)
 );
