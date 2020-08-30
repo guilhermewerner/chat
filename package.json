@@ -2,7 +2,7 @@
     "name": "chat",
     "version": "1.0.0",
     "description": "Realtime Chat",
-    "repository": "https://github.com/GuiNerd/Chat",
+    "repository": "https://github.com/GuilhermeWerner/Chat",
     "author": "GuiNerd <guinerdinho@gmail.com>",
     "license": "MIT",
     "private": true,
