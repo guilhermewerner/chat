@@ -1,4 +1,7 @@
-var socket = io('http://192.168.0.25:3333');
+/**
+ * Change with your ip address + the server port
+ */
+const socket = io('http://192.168.0.25:3333');
 
 function renderMessage(message) {
     $('#messages').append(`<li class="list-group-item"><strong>${message.author}:</strong> ${message.content}</li>`);
