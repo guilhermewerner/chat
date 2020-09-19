@@ -6,10 +6,10 @@
     "author": "GuiNerd <guinerdinho@gmail.com>",
     "license": "MIT",
     "private": true,
-    "main": "src/server.js",
+    "main": "./Source/Server.js",
     "scripts": {
-        "start": "node src/server.js",
-        "dev": "nodemon src/server.js"
+        "start": "node ./Source/Server.js",
+        "dev": "nodemon ./Source/Server.js"
     },
     "dependencies": {
         "dotenv": "^8.2.0",
