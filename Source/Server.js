@@ -29,11 +29,11 @@ let messages = [];
 io.on('connection', socket => {
     console.log(`Socket ${socket.id} connected`);
 
-    socket.emit('previousMessages', messages);
+    socket.emit('previous-messages', messages);
 
-    socket.on('sendMessage', data => {
+    socket.on('send-message', data => {
         messages.push(data);
-        socket.broadcast.emit('receiveMessage', data);
+        socket.broadcast.emit('receive-message', data);
     })
 })
 

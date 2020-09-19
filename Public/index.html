@@ -38,7 +38,7 @@
                 <div class="pt-4">
                     <form id="chat">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
+                            <label for="exampleInputEmail1">Name</label>
                             <input type="text" class="form-control" name="username">
                         </div>
                         <div class="form-group">
@@ -73,38 +73,7 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
-            var socket = io('http://192.168.0.25:3333');
-
-            function renderMessage(message) {
-                $('#messages').append(`<li class="list-group-item"><strong>${message.author}:</strong> ${message.content}</li>`);
-            }
-
-            socket.on('previousMessages', function (messages) {
-                for (message of messages) {
-                    renderMessage(message);
-                }
-            });
-
-            socket.on('receiveMessage', function (message) {
-                renderMessage(message);
-            });
-
-            $('#chat').submit(function (event) {
-                event.preventDefault();
-
-                var author = $('input[name=username]').val();
-                var content = $('textarea[name=message]').val();
-
-                if (author.length && content.length) {
-                    var messageObj = { author, content }
-                }
-
-                renderMessage(messageObj);
-
-                socket.emit('sendMessage', messageObj);
-            })
-        </script>
+        <script src="./socket.js"></script>
     </body>
 
 </html>
